@@ -1,5 +1,6 @@
 import React from 'react'
 import AppAuxii from '../../../hoc/AppAuxi'
+import Button from '../../UI/Button/Button'
 
 const orderSummary = (props) => {
 const ingredientSummary = Object
@@ -19,7 +20,11 @@ const ingredientSummary = Object
             <ul>
                 {ingredientSummary}
             </ul>
+            <p><strong>Total Price: {props.price}</strong></p>
             <p>Continue to Checkout?</p>
+            <Button btnType='Danger' clicked={props.purchaseCanceled}>CANCEL</Button>
+            <Button btnType= 'Success' clicked={props.purchaseContinue}>CONTINUE</Button>
+
         </AppAuxii>
     );
 };

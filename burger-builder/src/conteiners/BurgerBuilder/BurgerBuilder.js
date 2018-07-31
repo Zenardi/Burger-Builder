@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import AppAuxi from '../../hoc/AppAuxi';
 import Burger from '../../components/Burger/Burger';
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
+import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 const INGREDIENTS_PRICES = {
     salad: 0.5,
@@ -20,7 +22,8 @@ class BurgerBuilder extends Component {
             meat: 2
         },
         totalPrice: 4,
-        puchasable: false
+        puchasable: false,
+        purchasing: false
     }
 
     updatePurchaseState(ingredients) {
@@ -74,6 +77,16 @@ class BurgerBuilder extends Component {
         
     }
 
+
+    purchaseHandler = () => {
+        this.setState({purchasing: true})
+    }
+
+    purchaseCancelHandler = () => {
+      this.setState({purchasing: false})
+    }
+    
+
     render() {
         const disableInfo = {
             ...this.state.ingredients
@@ -85,13 +98,17 @@ class BurgerBuilder extends Component {
 
         return (
             <AppAuxi>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
+                    <OrderSummary ingredients= {this.state.ingredients}/> 
+                </Modal>
                 <Burger ingredients={this.state.ingredients}/>
                 <BuildControls
-                    ingredientAdded={this.addIngredientHandler}
-                    ingredientRemoved={this.removeIngredientHandler}
-                    disabled={disableInfo}
-                    price={this.state.totalPrice}
-                    purchasable={this.state.puchasable}/>
+                        ingredientAdded={this.addIngredientHandler}
+                        ingredientRemoved={this.removeIngredientHandler}
+                        disabled={disableInfo}
+                        price={this.state.totalPrice}
+                        purchasable={this.state.puchasable}
+                        ordered={this.purchaseHandler}/>
             </AppAuxi>
 
         );

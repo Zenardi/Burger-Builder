@@ -3,7 +3,6 @@ import AppAuxi from '../../hoc/AppAuxi';
 import classes from './Layout.css';
 import Toolbar from './../Navigation/Toolbar/Toolbar';
 import SideDrawer from './../Navigation/SideDrawer/SideDrawer';
-import drawerToggle from './../Navigation/SideDrawer/DrawerToggle/DrawerToggle';
 
 class Layout extends Component {
 
